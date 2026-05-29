@@ -330,12 +330,14 @@ export const samplePortfolio: PortfolioData = {
     ],
 };
 
+const jpyCurrencyFormatter = new Intl.NumberFormat('ja-JP', {
+    style: 'currency',
+    currency: 'JPY',
+    maximumFractionDigits: 0,
+});
+
 export function formatCurrency(amount: number): string {
-    return new Intl.NumberFormat('ja-JP', {
-        style: 'currency',
-        currency: 'JPY',
-        maximumFractionDigits: 0,
-    }).format(amount);
+    return jpyCurrencyFormatter.format(amount);
 }
 
 export function formatPercentage(value: number): string {
@@ -352,16 +354,19 @@ export function formatDateLabel(date?: string): string {
         return '未設定';
     }
 
-    const parsed = new Date(date);
-    if (Number.isNaN(parsed.getTime())) {
-        return date;
+    const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(date);
+    if (match) {
+        return `${match[1]}/${match[2]}/${match[3]}`;
     }
 
-    return `${parsed.getFullYear()}/${String(parsed.getMonth() + 1).padStart(2, '0')}/${String(parsed.getDate()).padStart(2, '0')}`;
+    return date;
 }
 
-export function getStatusLabel(status: UnitStatus | RepairStatus | TaskStatus): string {
+export function getStatusLabel(status: PropertyStatus | UnitStatus | RepairStatus | TaskStatus): string {
     const labels: Record<string, string> = {
+        active: '運用中',
+        sold: '売却済み',
+        paused: '一時停止',
         occupied: '入居中',
         vacant: '空室',
         recruiting: '募集中',

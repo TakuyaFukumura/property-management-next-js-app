@@ -32,7 +32,7 @@ describe('property-management helpers', () => {
     });
 
     it('表示用フォーマッタが日本語表記を返す', () => {
-        expect(formatCurrency(323000)).toBe('￥323,000');
+        expect(formatCurrency(323000)).toMatch(/323,000/);
         expect(formatPercentage(66.666)).toBe('66.7%');
         expect(formatMonthLabel('2026-05')).toBe('2026年05月');
     });

@@ -11,6 +11,7 @@ import {
 } from '../../lib/property-management';
 
 const dashboard = buildDashboardSnapshot(samplePortfolio, DEFAULT_TARGET_MONTH);
+const propertySummaryMap = new Map(dashboard.propertySummaries.map((s) => [s.propertyId, s]));
 
 const kpiCards = [
     {label: '総物件数', value: `${dashboard.totalProperties}棟`},
@@ -87,7 +88,7 @@ export default function Home() {
 
                     <div className="grid gap-4 lg:grid-cols-3">
                         {samplePortfolio.properties.map((property) => {
-                            const summary = dashboard.propertySummaries.find((item) => item.propertyId === property.id);
+                            const summary = propertySummaryMap.get(property.id);
 
                             return (
                                 <article
@@ -101,7 +102,7 @@ export default function Home() {
                                                 <p className="text-sm text-slate-500 dark:text-slate-400">{property.type}</p>
                                             </div>
                                             <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-900/30 dark:text-blue-200">
-                                                {property.ownershipStatus === 'active' ? '運用中' : property.ownershipStatus}
+                                                {getStatusLabel(property.ownershipStatus)}
                                             </span>
                                         </div>
                                         <p className="text-sm text-slate-600 dark:text-slate-300">{property.address}</p>
@@ -160,14 +161,14 @@ export default function Home() {
                         <table className="min-w-full divide-y divide-slate-200 text-left text-sm dark:divide-slate-800">
                             <thead>
                             <tr className="text-slate-500 dark:text-slate-400">
-                                <th className="px-3 py-3 font-medium">物件名</th>
-                                <th className="px-3 py-3 font-medium">部屋番号</th>
-                                <th className="px-3 py-3 font-medium">間取り</th>
-                                <th className="px-3 py-3 font-medium">面積</th>
-                                <th className="px-3 py-3 font-medium">賃料</th>
-                                <th className="px-3 py-3 font-medium">共益費</th>
-                                <th className="px-3 py-3 font-medium">ステータス</th>
-                                <th className="px-3 py-3 font-medium">契約終了予定日</th>
+                                <th scope="col" className="px-3 py-3 font-medium">物件名</th>
+                                <th scope="col" className="px-3 py-3 font-medium">部屋番号</th>
+                                <th scope="col" className="px-3 py-3 font-medium">間取り</th>
+                                <th scope="col" className="px-3 py-3 font-medium">面積</th>
+                                <th scope="col" className="px-3 py-3 font-medium">賃料</th>
+                                <th scope="col" className="px-3 py-3 font-medium">共益費</th>
+                                <th scope="col" className="px-3 py-3 font-medium">ステータス</th>
+                                <th scope="col" className="px-3 py-3 font-medium">契約終了予定日</th>
                             </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
@@ -223,11 +224,11 @@ export default function Home() {
                         <table className="min-w-full divide-y divide-slate-200 text-left text-sm dark:divide-slate-800">
                             <thead>
                             <tr className="text-slate-500 dark:text-slate-400">
-                                <th className="px-3 py-3 font-medium">物件名</th>
-                                <th className="px-3 py-3 font-medium">当月収入</th>
-                                <th className="px-3 py-3 font-medium">当月支出</th>
-                                <th className="px-3 py-3 font-medium">当月収支</th>
-                                <th className="px-3 py-3 font-medium">要対応件数</th>
+                                <th scope="col" className="px-3 py-3 font-medium">物件名</th>
+                                <th scope="col" className="px-3 py-3 font-medium">当月収入</th>
+                                <th scope="col" className="px-3 py-3 font-medium">当月支出</th>
+                                <th scope="col" className="px-3 py-3 font-medium">当月収支</th>
+                                <th scope="col" className="px-3 py-3 font-medium">要対応件数</th>
                             </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
