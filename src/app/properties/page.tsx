@@ -38,7 +38,7 @@ export default function PropertiesPage() {
                                 <th scope="col" className="px-3 py-3 font-medium">当月収支</th>
                                 <th scope="col" className="px-3 py-3 font-medium">要対応件数</th>
                                 <th scope="col" className="px-3 py-3 font-medium">ステータス</th>
-                                <th scope="col" className="px-3 py-3 font-medium"></th>
+                                <th scope="col" className="px-3 py-3 font-medium">操作</th>
                             </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-200 dark:divide-slate-800">

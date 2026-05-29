@@ -20,6 +20,7 @@ const kpiCards = [
     {label: '空室数', value: `${dashboard.vacantUnits}室`},
     {label: '当月総収入', value: formatCurrency(dashboard.totalIncome)},
     {label: '当月総支出', value: formatCurrency(dashboard.totalExpense)},
+    {label: '当月収支差額', value: formatCurrency(dashboard.cashflow)},
     {label: '要対応件数', value: `${dashboard.attentionCount}件`},
 ];
 
@@ -298,7 +299,7 @@ export default function Home() {
                                             </div>
                                             <div>
                                                 <dt className="text-slate-500 dark:text-slate-400">費用</dt>
-                                                <dd className="mt-1 font-medium">{repair.cost ? formatCurrency(repair.cost) : '未設定'}</dd>
+                                                <dd className="mt-1 font-medium">{repair.cost != null ? formatCurrency(repair.cost) : '未設定'}</dd>
                                             </div>
                                         </dl>
                                     </article>

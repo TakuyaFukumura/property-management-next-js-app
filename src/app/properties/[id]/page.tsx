@@ -216,7 +216,7 @@ export default async function PropertyDetailPage({params}: {params: Promise<{id:
                                             </div>
                                             <div>
                                                 <dt className="text-slate-500 dark:text-slate-400">費用</dt>
-                                                <dd className="mt-1 font-medium">{repair.cost ? formatCurrency(repair.cost) : '未設定'}</dd>
+                                                <dd className="mt-1 font-medium">{repair.cost != null ? formatCurrency(repair.cost) : '未設定'}</dd>
                                             </div>
                                         </dl>
                                     </article>

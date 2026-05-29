@@ -53,7 +53,7 @@ export default function RepairsPage() {
                                             <td className="px-3 py-3">{unit?.roomNumber ?? '-'}</td>
                                             <td className="px-3 py-3">{repair.repairCategory}</td>
                                             <td className="px-3 py-3">{repair.description}</td>
-                                            <td className="px-3 py-3">{repair.cost ? formatCurrency(repair.cost) : '未設定'}</td>
+                                            <td className="px-3 py-3">{repair.cost != null ? formatCurrency(repair.cost) : '未設定'}</td>
                                             <td className="px-3 py-3">{formatDateLabel(repair.repairedOn)}</td>
                                             <td className="px-3 py-3">
                                                 <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 dark:bg-slate-800 dark:text-slate-200">
