@@ -1,6 +1,16 @@
 'use client';
 
+import Link from 'next/link';
 import {useDarkMode} from './DarkModeProvider';
+
+const navLinks = [
+    {href: '/', label: 'ダッシュボード'},
+    {href: '/properties', label: '物件一覧'},
+    {href: '/units', label: '部屋一覧'},
+    {href: '/finance', label: '月次収支'},
+    {href: '/repairs', label: '修繕履歴'},
+    {href: '/tasks', label: '要対応一覧'},
+];
 
 export default function Header() {
     const {theme, setTheme} = useDarkMode();
@@ -35,10 +45,21 @@ export default function Header() {
             border-gray-200 dark:border-gray-700 sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
-                    <div className="flex items-center">
-                        <h1 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
-                            property-management-next-js-app
-                        </h1>
+                    <div className="flex items-center gap-6">
+                        <Link href="/" className="text-xl font-semibold text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            賃貸管理システム
+                        </Link>
+                        <nav className="hidden md:flex items-center gap-1">
+                            {navLinks.map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                                >
+                                    {link.label}
+                                </Link>
+                            ))}
+                        </nav>
                     </div>
 
                     <div className="flex items-center">
@@ -58,3 +79,4 @@ export default function Header() {
         </header>
     );
 }
+

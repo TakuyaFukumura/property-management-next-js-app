@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
     buildDashboardSnapshot,
     DEFAULT_TARGET_MONTH,
@@ -54,11 +55,11 @@ export default function Home() {
                         </div>
 
                         <div className="flex flex-wrap gap-3">
-                            <a className={linkClassName} href="#properties">物件一覧</a>
-                            <a className={linkClassName} href="#units">部屋一覧</a>
-                            <a className={linkClassName} href="#finance">月次収支</a>
-                            <a className={linkClassName} href="#repairs">修繕履歴</a>
-                            <a className={linkClassName} href="#tasks">要対応一覧</a>
+                            <Link className={linkClassName} href="/properties">物件一覧</Link>
+                            <Link className={linkClassName} href="/units">部屋一覧</Link>
+                            <Link className={linkClassName} href="/finance">月次収支</Link>
+                            <Link className={linkClassName} href="/repairs">修繕履歴</Link>
+                            <Link className={linkClassName} href="/tasks">要対応一覧</Link>
                         </div>
                     </div>
                 </section>
@@ -140,6 +141,12 @@ export default function Home() {
                                     <p className="mt-auto rounded-xl border border-dashed border-slate-300 p-3 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
                                         {summary?.note}
                                     </p>
+                                    <Link
+                                        href={`/properties/${property.id}`}
+                                        className="mt-2 block rounded-xl bg-blue-50 px-4 py-2 text-center text-sm font-medium text-blue-700 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-200 dark:hover:bg-blue-900/40"
+                                    >
+                                        詳細を見る
+                                    </Link>
                                 </article>
                             );
                         })}
