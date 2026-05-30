@@ -31,6 +31,12 @@ describe('Header', () => {
             expect(screen.getByText('賃貸管理システム')).toBeInTheDocument();
         });
 
+        it('設定画面へのナビゲーションリンクが表示される', () => {
+            renderWithProvider();
+
+            expect(screen.getByRole('link', {name: '設定'})).toHaveAttribute('href', '/settings');
+        });
+
         it('ヘッダーのHTML構造が正しい', () => {
             renderWithProvider();
 

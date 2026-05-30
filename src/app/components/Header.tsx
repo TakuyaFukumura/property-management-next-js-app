@@ -10,6 +10,7 @@ const navLinks = [
     {href: '/finance', label: '月次収支'},
     {href: '/repairs', label: '修繕履歴'},
     {href: '/tasks', label: '要対応一覧'},
+    {href: '/settings', label: '設定'},
 ];
 
 export default function Header() {
@@ -79,4 +80,3 @@ export default function Header() {
         </header>
     );
 }
-

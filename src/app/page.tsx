@@ -61,6 +61,7 @@ export default function Home() {
                             <Link className={linkClassName} href="/finance">月次収支</Link>
                             <Link className={linkClassName} href="/repairs">修繕履歴</Link>
                             <Link className={linkClassName} href="/tasks">要対応一覧</Link>
+                            <Link className={linkClassName} href="/settings">設定</Link>
                         </div>
                     </div>
                 </section>

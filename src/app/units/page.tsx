@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
     buildDashboardSnapshot,
     DEFAULT_TARGET_MONTH,
@@ -19,6 +20,14 @@ export default function UnitsPage() {
                         <p className="text-sm text-slate-600 dark:text-slate-300">
                             全物件の部屋ごとの稼働状況・賃料・契約終了予定日を確認できます。
                         </p>
+                        <div>
+                            <Link
+                                href="/units/new"
+                                className="inline-flex rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-medium text-blue-700 transition hover:border-blue-300 hover:bg-blue-50 dark:border-blue-800 dark:bg-gray-900 dark:text-blue-200 dark:hover:bg-gray-800"
+                            >
+                                部屋を登録・編集
+                            </Link>
+                        </div>
                     </div>
                 </section>
 
