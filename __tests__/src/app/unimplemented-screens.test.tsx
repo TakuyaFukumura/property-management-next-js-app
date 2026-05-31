@@ -12,6 +12,10 @@ describe('未実装だった画面の追加', () => {
 
         expect(screen.getByRole('heading', {name: '部屋登録・編集'})).toBeInTheDocument();
         expect(screen.getByLabelText('物件 *')).toBeInTheDocument();
+        expect(screen.getByRole('option', {name: '入居中'})).toHaveValue('occupied');
+        expect(screen.getByRole('option', {name: '空室'})).toHaveValue('vacant');
+        expect(screen.getByRole('option', {name: '募集中'})).toHaveValue('recruiting');
+        expect(screen.getByRole('option', {name: '募集停止'})).toHaveValue('unavailable');
         expect(screen.getByRole('button', {name: '保存'})).toBeInTheDocument();
     });
 

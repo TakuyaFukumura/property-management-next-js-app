@@ -1,9 +1,11 @@
+import type {UnitStatus} from '../../../../lib/property-management';
 import {samplePortfolio} from '../../../../lib/property-management';
 
-const unitStatuses = [
+const unitStatuses: Array<{value: UnitStatus; label: string}> = [
     {value: 'occupied', label: '入居中'},
     {value: 'vacant', label: '空室'},
-    {value: 'reserved', label: '募集停止'},
+    {value: 'recruiting', label: '募集中'},
+    {value: 'unavailable', label: '募集停止'},
 ];
 
 export default function UnitFormPage() {
