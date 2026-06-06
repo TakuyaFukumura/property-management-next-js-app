@@ -5,6 +5,19 @@
 フォーマットは [Keep a Changelog](https://keepachangelog.com/ja/1.0.0/) に基づいており、
 このプロジェクトは [Semantic Versioning](https://semver.org/lang/ja/) に従っています。
 
+## [0.3.0] - 2026-05-30
+
+### 追加
+
+- 部屋登録・編集画面（`/units/new`）を追加
+- 収入登録画面（`/finance/income/new`）と支出登録画面（`/finance/expense/new`）を追加
+- 設定画面（`/settings`）を追加
+- ヘッダー、部屋一覧、月次収支から新規画面へ遷移する導線を追加
+
+### 変更
+
+- 未使用となった `docs/13_実装進捗調査.md` を削除
+
 ## [0.2.0] - 2026-05-22
 
 ### 追加
