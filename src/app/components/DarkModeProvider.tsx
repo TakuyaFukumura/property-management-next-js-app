@@ -1,6 +1,6 @@
 'use client';
 
-import {createContext, ReactNode, useContext, useEffect, useMemo, useState} from 'react';
+import {createContext, ReactNode, useContext, useEffect, useMemo, useSyncExternalStore} from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -11,40 +11,37 @@ interface DarkModeContextType {
 }
 
 const DarkModeContext = createContext<DarkModeContextType | undefined>(undefined);
+const themeListeners = new Set<() => void>();
+
+function subscribeToTheme(listener: () => void) {
+    themeListeners.add(listener);
+    return () => themeListeners.delete(listener);
+}
+
+function getThemeSnapshot(): Theme {
+    if (typeof window === 'undefined') {
+        return 'light';
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : 'light';
+}
+
+function getServerThemeSnapshot(): Theme {
+    return 'light';
+}
 
 export function DarkModeProvider({children}: { readonly children: ReactNode }) {
-    const [theme, setTheme] = useState<Theme>('light');
-    const [isDark, setIsDark] = useState(false);
+    const theme = useSyncExternalStore(subscribeToTheme, getThemeSnapshot, getServerThemeSnapshot);
+    const isDark = theme === 'dark';
 
     useEffect(() => {
-        // ブラウザ環境のみlocalStorageにアクセス
-        if (globalThis.window !== undefined) {
-            const savedTheme = localStorage.getItem('theme') as Theme;
-            if (savedTheme && ['light', 'dark'].includes(savedTheme)) {
-                setTheme(savedTheme);
-            }
-        }
-    }, []);
-
-    useEffect(() => {
-        const updateTheme = () => {
-            const isDarkMode = theme === 'dark';
-            setIsDark(isDarkMode);
-
-            // HTMLタグにdarkクラスを追加/削除
-            if (isDarkMode) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        };
-
-        updateTheme();
-    }, [theme]);
+        document.documentElement.classList.toggle('dark', isDark);
+    }, [isDark]);
 
     const handleSetTheme = (newTheme: Theme) => {
-        setTheme(newTheme);
         localStorage.setItem('theme', newTheme);
+        themeListeners.forEach((listener) => listener());
     };
 
     const value = useMemo(() => ({theme, setTheme: handleSetTheme, isDark}), [theme, isDark]);

@@ -71,7 +71,7 @@ describe('DarkModeProvider', () => {
         });
 
         it('localStorageに保存されたテーマを読み込む', () => {
-            localStorageMock.getItem.mockReturnValue('dark');
+            localStorageMock.setItem('theme', 'dark');
 
             renderWithProvider(<TestComponent/>);
 
@@ -80,7 +80,7 @@ describe('DarkModeProvider', () => {
         });
 
         it('無効なlocalStorageの値は無視される', () => {
-            localStorageMock.getItem.mockReturnValue('invalid-theme');
+            localStorageMock.setItem('theme', 'invalid-theme');
 
             renderWithProvider(<TestComponent/>);
 
@@ -107,7 +107,7 @@ describe('DarkModeProvider', () => {
         });
 
         it('ダークモードからライトモードに切り替える', () => {
-            localStorageMock.getItem.mockReturnValue('dark');
+            localStorageMock.setItem('theme', 'dark');
 
             renderWithProvider(<TestComponent/>);
 
@@ -163,7 +163,6 @@ describe('DarkModeProvider', () => {
         it('Provider内で使用すると正しく動作する', () => {
             // localStorageをクリアして確実にライトモードから開始
             localStorageMock.clear();
-            localStorageMock.getItem.mockReturnValue(null);
 
             const wrapper = ({children}: { children: React.ReactNode }) => (
                 <DarkModeProvider>{children}</DarkModeProvider>
